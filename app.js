@@ -10,10 +10,10 @@ let interface = readline.createInterface(process.stdin, process.stdout);
 const INIT = `  
 
 
-                            **************\n
-                            MIS FORMULAS \n 
-                            by: urgos\n
-                            **************
+                    **************\n
+                    MIS FORMULAS \n 
+                    by: urgos\n
+                    **************
 
                 `;
 
@@ -28,13 +28,17 @@ setTimeout(() => {
   mainScrean();
 }, 2500);
 
-function mainScrean() {
+async function mainScrean() {
   process.stdout.write("\033c");
+
   interface.question(
     Messages.Inicio + os.EOL + pantalla + os.EOL + os.EOL,
     (res) => {
-      const resultado = scripts.find((scrip) => scrip.id == res.trim());
-      return Ejecutar(resultado);
+      if (res) {
+        const resultado = scripts.find((scrip) => scrip.id == res.trim());
+        Ejecutar(resultado);
+      }
+      
     }
   );
 }
@@ -52,12 +56,11 @@ async function Ejecutar(resultado) {
     );
   }
   interface.close();
-
   const final = resultado.f.apply(null, answers);
   if (!api.hasTermux) {
     clipboardy.writeSync(`$$ ${final.toString()} $$`);
   } else {
-    api.vibrate().duration(3000).run();
+    api.vibrate().duration(2000).run();
     api.clipboardSet().text(`$$ ${final.toString()} $$`).run();
   }
 }
