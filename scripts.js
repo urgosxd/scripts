@@ -1,10 +1,10 @@
 const Scripts = [
   {
     id: 1,
-    nombre: "Suma",
-    parametros: ["operador1", "operador2"],
-    f: (a, b) => {
-      const resultado = parseInt(a) + parseInt(b);
+    nombre: "Ecuacion cuadratica",
+    parametros: ["valorX"],
+    f: (a) => {
+      const resultado = Math.sqrt(parseInt(a));
       return resultado;
     },
   },
