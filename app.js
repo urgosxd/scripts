@@ -3,6 +3,7 @@ const Messages = require("./messages");
 const scripts = require("./scripts");
 const os = require("os");
 const clipboardy = require("clipboardy");
+const api = require("termux");
 
 let interface = readline.createInterface(process.stdin, process.stdout);
 
@@ -51,6 +52,11 @@ async function Ejecutar(resultado) {
     );
   }
   interface.close();
+
   const final = resultado.f.apply(null, answers);
-  clipboardy.writeSync(`$$ ${final.toString()} $$`);
+  if (!api.hasTermux) {
+    clipboardy.writeSync(`$$ ${final.toString()} $$`);
+  } else {
+    api.clipboardSet().text(`$$ ${final.toString()} $$`).run();
+  }
 }
