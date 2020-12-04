@@ -57,6 +57,7 @@ async function Ejecutar(resultado) {
   if (!api.hasTermux) {
     clipboardy.writeSync(`$$ ${final.toString()} $$`);
   } else {
+    api.vibrate().duration(3000).run();
     api.clipboardSet().text(`$$ ${final.toString()} $$`).run();
   }
 }
