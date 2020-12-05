@@ -60,6 +60,6 @@ async function Ejecutar(resultado) {
     clipboardy.writeSync(final.toString());
   } else {
     api.vibrate().duration(2000).run();
-    api.clipboardSet().text(final.toString()).run();
+    clipboardy.writeSync(final.toString());
   }
 }

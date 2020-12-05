@@ -1,5 +1,6 @@
 const Fraction = require("fraction.js");
 
+const back = `\\`;
 const Scripts = [
   {
     id: 1,
@@ -69,8 +70,6 @@ const Scripts = [
       a = parseInt(a);
       b = parseInt(b);
       c = parseInt(c);
-
-      const back = "\\";
 
       if (a !== 0) {
         const ejeX = (-1 * b) / (2 * a);
