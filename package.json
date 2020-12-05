@@ -1,0 +1,24 @@
+{
+  "name": "mathscript",
+  "version": "1.0.0",
+  "description": "Ninguna",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/urgosxd/scripts.git"
+  },
+  "author": "Josue",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/urgosxd/scripts/issues"
+  },
+  "homepage": "https://github.com/urgosxd/scripts#readme",
+  "dependencies": {
+    "clipboardy": "^2.3.0",
+    "fraction.js": "^4.0.12",
+    "termux": "^1.1.1"
+  }
+}
