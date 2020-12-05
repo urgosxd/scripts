@@ -38,7 +38,6 @@ async function mainScrean() {
         const resultado = scripts.find((scrip) => scrip.id == res.trim());
         Ejecutar(resultado);
       }
-      
     }
   );
 }
@@ -58,9 +57,9 @@ async function Ejecutar(resultado) {
   interface.close();
   const final = resultado.f.apply(null, answers);
   if (!api.hasTermux) {
-    clipboardy.writeSync(`$$ ${final.toString()} $$`);
+    clipboardy.writeSync(final.toString());
   } else {
     api.vibrate().duration(2000).run();
-    api.clipboardSet().text(`$$ ${final.toString()} $$`).run();
+    api.clipboardSet().text(final.toString()).run();
   }
 }
