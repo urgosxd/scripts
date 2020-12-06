@@ -4,24 +4,6 @@ const back = `\\`;
 const Scripts = [
   {
     id: 1,
-    nombre: "Suma",
-    parametros: ["operador1", "operador2"],
-    f: (a, b) => {
-      const resultado = parseInt(a) + parseInt(b);
-      return `$$${resultado}$$`;
-    },
-  },
-  {
-    id: 2,
-    nombre: "Raiz",
-    parametros: ["Numero"],
-    f: (a) => {
-      const resultado = Math.sqrt(parseInt(a));
-      return `$$${resultado}$$`;
-    },
-  },
-  {
-    id: 3,
     nombre: "Ecuacion Primer Grado",
     parametros: ["coeficienteLineal", "terminoIndependiente"],
     f: (a, b) => {
@@ -29,14 +11,14 @@ const Scripts = [
       b = parseInt(b);
 
       if (a !== 0) {
-        const resultado = (-1 * b) / a;
+        let resultado = (-1 * b) / a;
         return `$$x = ${resultado}$$`;
       }
       return "a != 0";
     },
   },
   {
-    id: 4,
+    id: 2,
     nombre: "Ecuacion Segundo Grado",
     parametros: [
       "coeficienteCuadratico",
@@ -49,8 +31,8 @@ const Scripts = [
       c = parseInt(c);
 
       if (Math.sqrt(b * b - 4 * a * c) > -1) {
-        const resultado1 = (-1 * b + Math.sqrt(b * b - 4 * a * c)) / (2 * a);
-        const resultado2 = (-1 * b - Math.sqrt(b * b - 4 * a * c)) / (2 * a);
+        let resultado1 = (-1 * b + Math.sqrt(b * b - 4 * a * c)) / (2 * a);
+        let resultado2 = (-1 * b - Math.sqrt(b * b - 4 * a * c)) / (2 * a);
 
         return `$$x_1 = ${resultado1} \\\\ \n x_2 = ${resultado2}$$`;
       } else {
@@ -59,7 +41,7 @@ const Scripts = [
     },
   },
   {
-    id: 5,
+    id: 3,
     nombre: "Funcion Vertice Parabola",
     parametros: [
       "coeficienteCuadratico",
@@ -72,14 +54,14 @@ const Scripts = [
       c = parseInt(c);
 
       if (a !== 0) {
-        const ejeX = (-1 * b) / (2 * a);
-        const ejeY = a * ejeX * ejeX + b * ejeX + c;
+        let ejeX = (-1 * b) / (2 * a);
+        let ejeY = a * ejeX * ejeX + b * ejeX + c;
         return `$$ V ${back}left(${back}underbrace{${ejeX}}_{x},${back}underbrace{${ejeY}}_{y}${back}right)$$`;
       }
     },
   },
   {
-    id: 6,
+    id: 4,
     nombre: "Dominio y rango funcion Racional",
     parametros: [
       "numeradorOnX (y/n)",
@@ -93,24 +75,24 @@ const Scripts = [
       b = parseInt(b);
       c = parseInt(c);
       d = parseInt(d);
-      const back = "\\";
+
       switch (bool) {
-        case "y":
-          const DenominadorInecuacion = (-1 * d) / c;
-          const frac = new Fraction(DenominadorInecuacion);
-          const frac2 = frac.toLatex(false);
-          const fracFinal = frac2.toString().substring(1);
+        case "y": {
+          let DenominadorInecuacion = (-1 * d) / c;
+          let frac = new Fraction(DenominadorInecuacion);
+          let frac2 = frac.toLatex(false);
+          let fracFinal = frac2.toString().substring(1);
 
           return `$$Dominio: ${back}mathbf{R} - ${back}left${back}lbrace${back}${fracFinal}${back}right${back}rbrace ${back}${back}\n Rango: ${back}mathbf{R} - ${back}left${back}lbrace${back}frac{${a}}{${c}}${back}right${back}rbrace $$`;
+        }
+        case "n": {
+          let DenominadorInecuacion = (-1 * d) / c;
+          let frac = new Fraction(DenominadorInecuacion);
+          let frac2 = frac.toLatex(false);
+          let fracFinal = frac2.toString().substring(1);
 
-        case "n":
-          const DenominadorInecuacion_2 = (-1 * d) / c;
-          const frac_2 = new Fraction(DenominadorInecuacion_2);
-          const frac2_2 = frac_2.toLatex(false);
-          const fracFinal_2 = frac2_2.toString().substring(1);
-
-          return `$$Dominio: ${back}mathbf{R} - ${back}left${back}lbrace${back}${fracFinal_2}${back}right${back}rbrace ${back}${back}\n Rango: ${back}mathbf{R} - ${back}left${back}lbrace${0}${back}right${back}rbrace $$`;
-
+          return `$$Dominio: ${back}mathbf{R} - ${back}left${back}lbrace${back}${fracFinal}${back}right${back}rbrace ${back}${back}\n Rango: ${back}mathbf{R} - ${back}left${back}lbrace${0}${back}right${back}rbrace $$`;
+        }
         default:
           return "crash";
       }
