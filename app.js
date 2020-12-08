@@ -57,9 +57,9 @@ async function Ejecutar(resultado) {
   interface.close();
   const final = resultado.f.apply(null, answers);
   if (!api.hasTermux) {
-    clipboardy.writeSync(final.toString());
+    clipboardy.writeSync(final);
   } else {
     api.vibrate().duration(2000).run();
-    clipboardy.writeSync(final.toString());
+    clipboardy.writeSync(final);
   }
 }
