@@ -7,6 +7,12 @@ String.prototype.replaceAt = function (index, char) {
   ca[index] = char;
   return ca.join("");
 };
+
+function encontrar(str) {
+  var re = /[\d\.]+/;
+  var nums = str.match(re);
+  return str.indexOf(nums);
+}
 exports.Ecuacion1Grado = (a, b, withoutFormat) => {
   a = parseInt(a);
   b = parseInt(b);
@@ -144,8 +150,7 @@ exports.DominioRangoRaiz = (bool, a, b, c) => {
       let intervalFinal = interval2
         .toString()
         .replace("Infinity", `${back}infty`)
-        .replace("Infinity", `${back}infty`)
-        .replace(",", ", ");
+        .replace("Infinity", `${back}infty`);
 
       return `$$Dominio(f) = ${intervalFinal.replaceAt(
         intervalFinal.indexOf(",", 9),
@@ -154,6 +159,20 @@ exports.DominioRangoRaiz = (bool, a, b, c) => {
       $$`;
     }
     case "n": {
+      let criticos = this.Ecuacion1Grado(b, c, "y");
+      let interval = new Interval(`[${criticos},${Number.POSITIVE_INFINITY})`);
+      let intervalFinal = interval
+        .toString()
+        .replace("Infinity", `${back}infty`);
+      intervalFinal =
+        criticos % 1 !== 0
+          ? intervalFinal.replace(
+              `${criticos}`,
+              `${criticos.toLatex().toString()}`
+            )
+          : intervalFinal;
+      console.log(encontrar(intervalFinal));
+      return `$$Dominio(f) =${intervalFinal} ${back}${back}\n Rango(f) = [0,${back}infty)$$`;
     }
 
     default:
