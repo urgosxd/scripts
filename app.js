@@ -26,7 +26,7 @@ process.stdout.write(INIT);
 
 setTimeout(() => {
   mainScrean();
-}, 2500);
+}, 500);
 
 async function mainScrean() {
   process.stdout.write("\033c");
