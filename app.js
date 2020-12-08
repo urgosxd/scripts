@@ -34,9 +34,12 @@ async function mainScrean() {
   interface.question(
     Messages.Inicio + os.EOL + pantalla + os.EOL + os.EOL,
     (res) => {
-      if (res) {
-        const resultado = scripts.find((scrip) => scrip.id == res.trim());
+      res = parseInt(res);
+      if (typeof res === "number" && res < scripts.length + 1) {
+        const resultado = scripts.find((scrip) => scrip.id === res);
         Ejecutar(resultado);
+      } else {
+        console.log("Ingresa un numero valido");
       }
     }
   );
@@ -57,11 +60,11 @@ async function Ejecutar(resultado) {
   interface.close();
   const final = resultado.f.apply(null, answers);
   if (!api.hasTermux) {
+    clipboardy.writeSync(final);
+  } else {
+    api.vibrate().duration(200).run();
     clipboardy.write(final).then((dat) => {
       console.log(dat);
     });
-  } else {
-    api.vibrate().duration(2000).run();
-    clipboardy.writeSync(final);
   }
 }
