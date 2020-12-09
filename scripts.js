@@ -50,6 +50,12 @@ const Scripts = [
     ],
     f: funciones.DominioRangoRaiz,
   },
+  {
+    id: 6,
+    nombre: "Funcion Valor Absoluto",
+    parametros: ["CoefienteAbs(index0 = coef x)", "TerminoIndependiente"],
+    f: funciones.ValorAbsoluto,
+  },
 ];
 
 module.exports = Scripts;

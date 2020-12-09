@@ -8,11 +8,11 @@ String.prototype.replaceAt = function (index, char) {
   return ca.join("");
 };
 
-function encontrar(str) {
-  var re = /[\d\.]+/;
-  var nums = str.match(re);
-  return str.indexOf(nums);
+function getNumbers(numberString) {
+  var regx = numberString.match(/-?\d+/g).map(Number);
+  return regx;
 }
+
 exports.Ecuacion1Grado = (a, b, withoutFormat) => {
   a = parseInt(a);
   b = parseInt(b);
@@ -171,11 +171,28 @@ exports.DominioRangoRaiz = (bool, a, b, c) => {
               `${criticos.toLatex().toString()}`
             )
           : intervalFinal;
-      console.log(encontrar(intervalFinal));
+
       return `$$Dominio(f) =${intervalFinal} ${back}${back}\n Rango(f) = [0,${back}infty)$$`;
     }
 
     default:
       break;
   }
+};
+
+exports.ValorAbsoluto = (str, c) => {
+  c = parseInt(c);
+  let b = 0;
+  let c2 = 0;
+  let signo;
+  str = getNumbers(str);
+
+  str.push("y");
+
+  let result = this.Ecuacion1Grado.apply(null, str);
+
+  let interval = new Interval(`[${c},${Number.POSITIVE_INFINITY})`);
+  let intervalFinal = interval.toString().replace("Infinity", `${back}infty`);
+
+  return `$$Dominio(f) = ${back}mathbf{R} ${back}${back}\n Rango(f)= ${intervalFinal}${back}${back}\n  V ${back}left(${back}underbrace{${result}}_{x},${back}underbrace{${c}}_{y}${back}right)$$`;
 };
