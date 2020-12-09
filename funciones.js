@@ -196,3 +196,10 @@ exports.ValorAbsoluto = (str, c) => {
 
   return `$$Dominio(f) = ${back}mathbf{R} ${back}${back}\n Rango(f)= ${intervalFinal}${back}${back}\n  V ${back}left(${back}underbrace{${result}}_{x},${back}underbrace{${c}}_{y}${back}right)$$`;
 };
+
+exports.MayorMaximoEntero = (a) => {
+  a = parseFloat(a);
+  let resultado = Math.ceil(a);
+  resultado = resultado - 1;
+  return `$$${resultado}$$`;
+};

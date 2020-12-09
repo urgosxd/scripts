@@ -56,6 +56,12 @@ const Scripts = [
     parametros: ["CoefienteAbs(index0 = coef x)", "TerminoIndependiente"],
     f: funciones.ValorAbsoluto,
   },
+  {
+    id: 7,
+    nombre: "Funcion Maximo Entero",
+    parametros: ["ValorX"],
+    f: funciones.MayorMaximoEntero,
+  },
 ];
 
 module.exports = Scripts;
