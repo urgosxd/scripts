@@ -14,8 +14,8 @@ function getNumbers(numberString) {
 }
 
 exports.Ecuacion1Grado = (a, b, withoutFormat) => {
-  a = parseInt(a);
-  b = parseInt(b);
+  a = parseFloat(a);
+  b = parseFloat(b);
 
   if (a !== 0) {
     var resultado = (-1 * b) / a;
@@ -33,9 +33,9 @@ exports.Ecuacion1Grado = (a, b, withoutFormat) => {
 };
 
 exports.Ecuacion2Grado = (a, b, c, withoutFormat) => {
-  a = parseInt(a);
-  b = parseInt(b);
-  c = parseInt(c);
+  a = parseFloat(a);
+  b = parseFloat(b);
+  c = parseFloat(c);
 
   if (Math.sqrt(b * b - 4 * a * c) > -1) {
     var resultado1 = (-1 * b + Math.sqrt(b * b - 4 * a * c)) / (2 * a);
@@ -64,9 +64,9 @@ exports.Ecuacion2Grado = (a, b, c, withoutFormat) => {
 };
 
 exports.VerticeParabola = (a, b, c) => {
-  a = parseInt(a);
-  b = parseInt(b);
-  c = parseInt(c);
+  a = parseFloat(a);
+  b = parseFloat(b);
+  c = parseFloat(c);
 
   if (a !== 0) {
     var ejeX = (-1 * b) / (2 * a);
@@ -90,10 +90,10 @@ exports.VerticeParabola = (a, b, c) => {
 };
 
 exports.DominioRangoRacional = (bool, a, b, c, d) => {
-  a = parseInt(a);
-  b = parseInt(b);
-  c = parseInt(c);
-  d = parseInt(d);
+  a = parseFloat(a);
+  b = parseFloat(b);
+  c = parseFloat(c);
+  d = parseFloat(d);
 
   switch (bool) {
     case "y": {
@@ -133,9 +133,9 @@ exports.DominioRangoRacional = (bool, a, b, c, d) => {
 };
 
 exports.DominioRangoRaiz = (bool, a, b, c) => {
-  a = parseInt(a);
-  b = parseInt(b);
-  c = parseInt(c);
+  a = parseFloat(a);
+  b = parseFloat(b);
+  c = parseFloat(c);
 
   switch (bool) {
     case "y": {
@@ -181,10 +181,7 @@ exports.DominioRangoRaiz = (bool, a, b, c) => {
 };
 
 exports.ValorAbsoluto = (str, c) => {
-  c = parseInt(c);
-  let b = 0;
-  let c2 = 0;
-  let signo;
+  c = parseFloat(c);
   str = getNumbers(str);
 
   str.push("y");
@@ -201,5 +198,21 @@ exports.MayorMaximoEntero = (a) => {
   a = parseFloat(a);
   let resultado = Math.ceil(a);
   resultado = resultado - 1;
-  return `$$${resultado}$$`;
+  return `$$${resultado}${back}${back} \n Dominio(f) = ${back}mathbf{R} ${back}${back} \n Rango(f) = ${back}mathbf{Z} $$`;
+};
+
+exports.Exponencial = (a, exp) => {
+  a = parseFloat(a);
+  exp = parseFloat(exp);
+
+  if (a > 1) {
+    let resultado = Math.pow(a, exp);
+
+    return `$$${resultado} Creciente ${back}${back} \n Dominio(f) = ${back}mathbf{R} ${back}${back} \n Rango(f) = (0,${back}infty)$$`;
+  } else if (a > 0 && a < 1) {
+    let resultado = Math.pow(a, exp);
+    return `$$${resultado} Decreciente ${back}${back} \n Dominio(f) = ${back}mathbf{R} ${back}${back} \n Rango(f) = (0,${back}infty)$$`;
+  } else {
+    console.log("A != 1 and 0");
+  }
 };

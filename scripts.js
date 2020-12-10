@@ -62,6 +62,12 @@ const Scripts = [
     parametros: ["ValorX"],
     f: funciones.MayorMaximoEntero,
   },
+  {
+    id: 8,
+    nombre: "Funcion Exponencial",
+    parametros: ["base", "exponente"],
+    f: funciones.Exponencial,
+  },
 ];
 
 module.exports = Scripts;
