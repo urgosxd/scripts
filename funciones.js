@@ -114,55 +114,57 @@ exports.DominioRangoRacional = (a, b, c, d) => {
   return `$$Dominio: ${back}mathbf{R} - ${back}left${back}lbrace${DenominadorInecuacion}${back}right${back}rbrace ${back}${back}\n Rango: ${back}mathbf{R} - ${back}left${back}lbrace${Rango}${back}right${back}rbrace $$`;
 };
 
-exports.DominioRangoRaiz = (bool, a, b, c) => {
+exports.DominioRangoRaiz = (a, b, c, withoutFormat) => {
   a = parseFloat(a);
   b = parseFloat(b);
   c = parseFloat(c);
 
-  switch (bool) {
-    case "y": {
-      let criticos = this.Ecuacion2Grado(a, b, c, "y");
-      let interval = new Interval(
-        `[${criticos[0]},${Number.POSITIVE_INFINITY})`
-      );
-      let interval2 = interval.union(
-        `(${Number.NEGATIVE_INFINITY},${criticos[1]}]`
-      );
+  if (a !== 0) {
+    let criticos = this.Ecuacion2Grado(a, b, c, "y");
+    let interval = new Interval(`[${criticos[0]},${Number.POSITIVE_INFINITY})`);
+    let interval2 = interval.union(
+      `(${Number.NEGATIVE_INFINITY},${criticos[1]}]`
+    );
 
-      let intervalFinal = interval2
-        .toString()
-        .replace("Infinity", `${back}infty`)
-        .replace("Infinity", `${back}infty`);
+    let intervalFinal =
+      withoutFormat == "y"
+        ? interval2
+        : interval2
+            .toString()
+            .replace("Infinity", `${back}infty`)
+            .replace("Infinity", `${back}infty`);
 
-      return `$$Dominio(f) = ${intervalFinal.replaceAt(
-        intervalFinal.indexOf(",", 9),
-        `${back}cup`
-      )} ${back}${back}\n Rango(f) = [0,${back}infty)
+    return withoutFormat == "y"
+      ? intervalFinal
+      : `$$Dominio(f) = ${intervalFinal.replaceAt(
+          intervalFinal.indexOf(",", 9),
+          `${back}cup`
+        )} ${back}${back}\n Rango(f) = [0,${back}infty)
       $$`;
-    }
-    case "n": {
-      let criticos = this.Ecuacion1Grado(b, c, "y");
-      let interval = new Interval(`[${criticos},${Number.POSITIVE_INFINITY})`);
-      let intervalFinal = interval
-        .toString()
-        .replace("Infinity", `${back}infty`);
-      intervalFinal =
-        criticos % 1 !== 0
-          ? intervalFinal.replace(
-              `${criticos}`,
-              `${criticos.toLatex().toString()}`
-            )
-          : intervalFinal;
+  } else {
+    let criticos = this.Ecuacion1Grado(b, c, "y");
+    let interval = new Interval(`[${criticos},${Number.POSITIVE_INFINITY})`);
+    let intervalFinal =
+      withoutFormat == "y"
+        ? interval2
+        : interval.toString().replace("Infinity", `${back}infty`);
+    intervalFinal =
+      withoutFormat == "y"
+        ? intervalFinal
+        : criticos % 1 !== 0
+        ? intervalFinal.replace(
+            `${criticos}`,
+            `${criticos.toLatex().toString()}`
+          )
+        : intervalFinal;
 
-      return `$$Dominio(f) =${intervalFinal} ${back}${back}\n Rango(f) = [0,${back}infty)$$`;
-    }
-
-    default:
-      break;
+    return withoutFormat == "y"
+      ? intervalFinal
+      : `$$Dominio(f) =${intervalFinal} ${back}${back}\n Rango(f) = [0,${back}infty)$$`;
   }
 };
 
-exports.ValorAbsoluto = (str, c) => {
+exports.ValorAbsoluto = (str, c, withoutFormat) => {
   c = parseFloat(c);
   str = getNumbers(str);
 
@@ -171,31 +173,42 @@ exports.ValorAbsoluto = (str, c) => {
   let result = this.Ecuacion1Grado.apply(null, str);
 
   let interval = new Interval(`[${c},${Number.POSITIVE_INFINITY})`);
-  let intervalFinal = interval.toString().replace("Infinity", `${back}infty`);
+  let intervalFinal =
+    withoutFormat == "y"
+      ? interval
+      : interval.toString().replace("Infinity", `${back}infty`);
 
-  return `$$Dominio(f) = ${back}mathbf{R} ${back}${back}\n Rango(f)= ${intervalFinal}${back}${back}\n  V ${back}left(${back}underbrace{${result}}_{x},${back}underbrace{${c}}_{y}${back}right)$$`;
+  return withoutFormat == "y"
+    ? intervalFinal
+    : `$$Dominio(f) = ${back}mathbf{R} ${back}${back}\n Rango(f)= ${intervalFinal}${back}${back}\n  V ${back}left(${back}underbrace{${result}}_{x},${back}underbrace{${c}}_{y}${back}right)$$`;
 };
 
-exports.MayorMaximoEntero = (a) => {
+exports.MayorMaximoEntero = (a, withoutFormat) => {
   a = parseFloat(a);
   let resultado = Math.ceil(a);
   resultado = resultado - 1;
-  return `$$${resultado}${back}${back} \n Dominio(f) = ${back}mathbf{R} ${back}${back} \n Rango(f) = ${back}mathbf{Z} $$`;
+  return withoutFormat == "y"
+    ? resultado
+    : `$$${resultado}${back}${back} \n Dominio(f) = ${back}mathbf{R} ${back}${back} \n Rango(f) = ${back}mathbf{Z} $$`;
 };
 
-exports.Exponencial = (a, exp) => {
+exports.Exponencial = (a, exp, withoutFormat) => {
   a = parseFloat(a);
   exp = parseFloat(exp);
 
-  if (a > 1) {
-    let resultado = Math.pow(a, exp);
-
-    return `$$${resultado} Creciente ${back}${back} \n Dominio(f) = ${back}mathbf{R} ${back}${back} \n Rango(f) = (0,${back}infty)$$`;
-  } else if (a > 0 && a < 1) {
-    let resultado = Math.pow(a, exp);
-    return `$$${resultado} Decreciente ${back}${back} \n Dominio(f) = ${back}mathbf{R} ${back}${back} \n Rango(f) = (0,${back}infty)$$`;
+  if (withoutFormat == "y") {
+    return Math.pow(a, exp);
   } else {
-    console.log("A != 1 and 0");
+    if (a > 1) {
+      let resultado = Math.pow(a, exp);
+
+      return `$$${resultado} Creciente ${back}${back} \n Dominio(f) = ${back}mathbf{R} ${back}${back} \n Rango(f) = (0,${back}infty)$$`;
+    } else if (a > 0 && a < 1) {
+      let resultado = Math.pow(a, exp);
+      return `$$${resultado} Decreciente ${back}${back} \n Dominio(f) = ${back}mathbf{R} ${back}${back} \n Rango(f) = (0,${back}infty)$$`;
+    } else {
+      console.log("A != 1 and 0");
+    }
   }
 };
 

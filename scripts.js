@@ -42,7 +42,6 @@ const Scripts = [
     id: 5,
     nombre: "Dominio y rango funcion Raiz",
     parametros: [
-      "Cuadratica/linear (y/n)",
       "CoeficienteCuadratico",
       "CoeficienteLinear",
       "TerminoIndependiente",
