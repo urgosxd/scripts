@@ -9,13 +9,13 @@ String.prototype.replaceAt = function (index, char) {
 };
 
 function getNumbers(numberString) {
-  var regx = numberString.match(/-?\d+/g).map(Number);
-  return regx;
+  let regex = numberString.split(",").map((el) => parseFloat(el));
+  return regex;
 }
 
 exports.Ecuacion1Grado = (a, b, withoutFormat) => {
-  a = parseFloat(a);
-  b = parseFloat(b);
+  a = parseInt(a);
+  b = parseInt(b);
 
   if (a !== 0) {
     var resultado = (-1 * b) / a;
@@ -33,9 +33,9 @@ exports.Ecuacion1Grado = (a, b, withoutFormat) => {
 };
 
 exports.Ecuacion2Grado = (a, b, c, withoutFormat) => {
-  a = parseFloat(a);
-  b = parseFloat(b);
-  c = parseFloat(c);
+  a = parseInt(a);
+  b = parseInt(b);
+  c = parseInt(c);
 
   if (Math.sqrt(b * b - 4 * a * c) > -1) {
     var resultado1 = (-1 * b + Math.sqrt(b * b - 4 * a * c)) / (2 * a);
@@ -64,9 +64,9 @@ exports.Ecuacion2Grado = (a, b, c, withoutFormat) => {
 };
 
 exports.VerticeParabola = (a, b, c) => {
-  a = parseFloat(a);
-  b = parseFloat(b);
-  c = parseFloat(c);
+  a = parseInt(a);
+  b = parseInt(b);
+  c = parseInt(c);
 
   if (a !== 0) {
     var ejeX = (-1 * b) / (2 * a);
@@ -89,47 +89,29 @@ exports.VerticeParabola = (a, b, c) => {
   }
 };
 
-exports.DominioRangoRacional = (bool, a, b, c, d) => {
-  a = parseFloat(a);
-  b = parseFloat(b);
-  c = parseFloat(c);
-  d = parseFloat(d);
+exports.DominioRangoRacional = (a, b, c, d) => {
+  a = parseInt(a);
+  b = parseInt(b);
+  c = parseInt(c);
+  d = parseInt(d);
 
-  switch (bool) {
-    case "y": {
-      var DenominadorInecuacion = (-1 * d) / c;
-      var Rango = 0;
-      if (DenominadorInecuacion % 1 !== 0) {
-        let frac = new Fraction(DenominadorInecuacion);
-        let frac2 = frac.toLatex(false);
-        DenominadorInecuacion = frac2.toString();
-      } else {
-      }
-
-      if ((a / c) % 1 !== 0) {
-        let frac = new Fraction(a / c);
-        let frac2 = frac.toLatex(false);
-        Rango = frac2.toString();
-      } else {
-        Rango = a / c;
-      }
-      return `$$Dominio: ${back}mathbf{R} - ${back}left${back}lbrace${DenominadorInecuacion}${back}right${back}rbrace ${back}${back}\n Rango: ${back}mathbf{R} - ${back}left${back}lbrace${Rango}${back}right${back}rbrace $$`;
-    }
-    case "n": {
-      var DenominadorInecuacion = (-1 * d) / c;
-
-      if (DenominadorInecuacion % 1 !== 0) {
-        let frac = new Fraction(DenominadorInecuacion);
-        let frac2 = frac.toLatex(false);
-        DenominadorInecuacion = frac2.toString();
-      } else {
-      }
-
-      return `$$Dominio: ${back}mathbf{R} - ${back}left${back}lbrace${DenominadorInecuacion}${back}right${back}rbrace ${back}${back}\n Rango: ${back}mathbf{R} - ${back}left${back}lbrace${0}${back}right${back}rbrace $$`;
-    }
-    default:
-      return "crash";
+  var DenominadorInecuacion = (-1 * d) / c;
+  if (DenominadorInecuacion % 1 !== 0) {
+    let frac = new Fraction(DenominadorInecuacion);
+    let frac2 = frac.toLatex(false);
+    DenominadorInecuacion = frac2.toString();
+  } else {
   }
+  var Rango = a / c;
+
+  if (Rango % 1 !== 0) {
+    let frac = new Fraction(a / c);
+    let frac2 = frac.toLatex(false);
+    Rango = frac2.toString();
+  } else {
+  }
+
+  return `$$Dominio: ${back}mathbf{R} - ${back}left${back}lbrace${DenominadorInecuacion}${back}right${back}rbrace ${back}${back}\n Rango: ${back}mathbf{R} - ${back}left${back}lbrace${Rango}${back}right${back}rbrace $$`;
 };
 
 exports.DominioRangoRaiz = (bool, a, b, c) => {
@@ -215,4 +197,48 @@ exports.Exponencial = (a, exp) => {
   } else {
     console.log("A != 1 and 0");
   }
+};
+
+exports.FuncionSeno = (a, b) => {
+  a = parseInt(a);
+  b = parseInt(b);
+
+  let frac = new Fraction(a / b);
+
+  let res = Math.sin((frac.s * frac.n * Math.PI) / frac.d);
+
+  return `$$ ${res} ${back}${back} \n Dominio(f) = ${back}mathbf{R} ${back}${back} \n Rango(f) = [-1,1]$$`;
+};
+
+exports.FuncionCoseno = (a, b) => {
+  a = parseInt(a);
+  b = parseInt(b);
+
+  let frac = new Fraction(a / b);
+
+  let res = Math.cos((frac.s * frac.n * Math.PI) / frac.d);
+
+  return `$$ ${res} ${back}${back} \n Dominio(f) = ${back}mathbf{R} ${back}${back} \n Rango(f) = [-1,1]$$`;
+};
+
+exports.FuncionTangente = (a, b) => {
+  a = parseInt(a);
+  b = parseInt(b);
+
+  let frac = new Fraction(a / b);
+
+  let res = Math.c((frac.s * frac.n * Math.PI) / frac.d);
+
+  return `$$ ${res} ${back}${back} \n Dominio(f) = ${back}mathbf{R} - ${back}left${back}lbrace k${back}pi + ${back}frac{${back}pi}{2} , k ${back}in ${back}mathbf{Z} ${back}right${back}rbrace ${back}${back} \n Rango(f) = ${back}mathbf{R}$$`;
+};
+
+exports.FuncionCotangente = (a, b) => {
+  a = parseInt(a);
+  b = parseInt(b);
+
+  let frac = new Fraction(a / b);
+
+  let res = 1 / Math.tan((frac.s * frac.n * Math.PI) / frac.d);
+
+  return `$$ ${res} ${back}${back} \n Dominio(f) = ${back}mathbf{R} - ${back}left${back}lbrace k${back}pi , k ${back}in ${back}mathbf{Z} ${back}right${back}rbrace ${back}${back} \n Rango(f) = ${back}mathbf{R}$$`;
 };

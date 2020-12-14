@@ -31,7 +31,6 @@ const Scripts = [
     id: 4,
     nombre: "Dominio y rango funcion Racional",
     parametros: [
-      "numeradorOnX (y/n)",
       "coeficienteNumerador1",
       "TerminoIndependienteNumerador2",
       "coeficienteDenominador1",
@@ -67,6 +66,30 @@ const Scripts = [
     nombre: "Funcion Exponencial",
     parametros: ["base", "exponente"],
     f: funciones.Exponencial,
+  },
+  {
+    id: 9,
+    nombre: "Funcion Seno",
+    parametros: ["Numerador", "Denominador"],
+    f: funciones.FuncionSeno,
+  },
+  {
+    id: 10,
+    nombre: "Funcion Coseno",
+    parametros: ["Numerador", "Denominador"],
+    f: funciones.FuncionCoseno,
+  },
+  {
+    id: 11,
+    nombre: "Funcion Tangente",
+    parametros: ["Numerador", "Denominador"],
+    f: funciones.FuncionTangente,
+  },
+  {
+    id: 12,
+    nombre: "Funcion Cotangente",
+    parametros: ["Numerador", "Denominador"],
+    f: funciones.FuncionCotangente,
   },
 ];
 

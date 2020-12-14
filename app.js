@@ -62,7 +62,6 @@ async function Ejecutar(resultado) {
   if (!api.hasTermux) {
     clipboardy.writeSync(final);
   } else {
-    api.vibrate().duration(200).run();
     clipboardy.write(final).then((dat) => {
       console.log(dat);
     });

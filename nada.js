@@ -1,3 +1,1 @@
-const asd = "3";
-
-console.log(parseFloat(asd));
+console.log(0 / 2);
