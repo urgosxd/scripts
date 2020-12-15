@@ -90,6 +90,35 @@ const Scripts = [
     parametros: ["Numerador", "Denominador"],
     f: funciones.FuncionCotangente,
   },
+  {
+    id: 13,
+    nombre: "Operacion de Funciones",
+    parametros: [
+      `
+  1 lineal\n
+  2 cuadratica\n
+  3 racional\n
+  4 raiz\n
+  5 absoluto\n
+  6 maximoEntero\n
+  7 exponencial\n
+
+  `,
+      "FuncionA",
+      `
+    1 lineal\n
+    2 cuadratica\n
+    3 racional\n
+    4 raiz\n
+    5 absoluto\n
+    6 maximoEntero\n
+    7 exponencial\n
+    
+      `,
+      "FuncionB",
+    ],
+    f: funciones.OperacionFunciones,
+  },
 ];
 
 module.exports = Scripts;
